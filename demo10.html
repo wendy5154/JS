@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Use Unicode -->
+        <meta charset="UTF-8" />
+        <title>Demo 10</title>
+        <script type="module">
+            // 選取要處理的元素
+            let scoresStringInput = document.querySelector("#scores-string");
+            let scoreSumSpan =document.querySelector("#score-sum")/* TODO：id 是 score-sum */; 
+            let scoreAverageSpan =document.querySelector("#score-average")/* TODO：id 是 score-average */;
+
+            // 計算分數，並顯示在網頁上
+            const updateScoreResults = function() {
+                // 取得使用者輸入的分數字串，以半形逗號隔開
+                let scoresString = scoresStringInput.value/* TODO */;
+
+                // 從逗號處，分開每個分數
+                let scoreStringArray = scoresString.split(",");
+
+                // 因為輸入的東西是字串，所以要一一轉成數字
+                // 然後放進新的陣列的末端
+                let scoreArray = [];
+                for(let scoreString of scoreStringArray) {
+                    let score = parseFloat(scoreString);
+                    scoreArray.push(score);
+                }
+
+                // 開始計算總和
+                let scoreSum = 0;
+                for(let score of scoreArray) {
+                    scoreSum = scoreSum + score;
+                }
+
+                // 印出總和
+                scoreSumSpan.textContent = `${scoreSum} 分`;
+
+                // 計算平均分數
+                let scoreAverage = scoreSum / scoreStringArray.length;
+
+                // 印出平均分數
+                scoreAverageSpan.textContent/* TODO */ = `${scoreAverage}`/* TODO */;
+            };
+
+            // 一旦使用者輸入，就更新分數
+            scoresStringInput.addEventListener("input"/* TODO：填入事件名稱（字串）*/,updateScoreResults /* TODO：指定要執行的函數 */);
+        </script>
+    </head>
+    <body>
+        <form>
+            <label>請輸入分數列表，以半形逗號隔開：<input id="scores-string" placeholder="e.g. &quot;80,75,95,40&quot;" /></label>
+        </form>
+        <div>
+            總分是：<span id="score-sum"></span><br />
+            平均分數是：<span id="score-average"></span>
+        </div>
+    </body>
+</html>
